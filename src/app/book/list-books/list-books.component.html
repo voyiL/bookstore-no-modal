@@ -1,0 +1,38 @@
+<div class="row p-3">
+    <div class="col-3 pt-3 border">
+        <app-create-book *ngIf="isAdd" (createBookEvent)="createBook($event)"></app-create-book>
+
+        <app-update-book *ngIf="!isAdd" [bookData]="bookData" (updateBookEvent)="updateBook($event)">
+        </app-update-book>
+    </div>
+    <table class="table table-striped">
+        <tr>
+            <th colspan="4" class="p-2">
+                <h1>Books</h1>
+            </th>
+        </tr>
+        <tr>
+            <th>Book Title</th>
+            <th>Is Available</th>
+            <th>Author</th>
+            <th style="width:fit-content">Actions</th>
+        </tr>
+        <tr *ngFor="let book of books$">
+            <td>{{book.title}}</td>
+            <td>{{book.isAvailable}}</td>
+            <td>{{book.author.firstname}} {{book.author.lastname}}</td>
+            <td>
+                <button type="button" class="btn btn-link" [disabled]="!isAdd"
+                    (click)="updateBook(book)">Update</button>
+                <span> | </span>
+                <!-- <button type="button" class="btn btn-link" [disabled]="!isAdd" (click)="deleteBook(book.id)">Delete</button> -->
+            </td>
+            <!-- </tr>
+                        <tr *ngFor="let a of authors$">
+                            <td>{{a.id}}</td>
+                            <td>{{a.firstname}}</td>
+                            <td>{{a.lastname}}</td>
+
+                        </tr> -->
+    </table>
+</div>

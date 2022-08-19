@@ -1,0 +1,116 @@
+<div class="container-fluid mt-5 border p-5">
+    <div class="row">
+        <div class="col-md-3 border pt-3 pb-3">
+            <app-create-author *ngIf="isAdd"></app-create-author>
+
+            <app-update-author *ngIf="!isAdd" [authorData]="authorData"></app-update-author>
+        </div>
+        <div class="col-md-9 border">
+            <div class="row p-3">
+                <table class="table table-striped">
+                    <tr>
+                        <th colspan="3">
+                            <h1 class="p-2">Authors</h1>
+                        </th>
+                    </tr>
+                    <tr>
+                        <th>Firstame</th>
+                        <th>Lastname</th>
+                        <th style="max-width: 10px;">Actions</th>
+                    </tr>
+                    <tr *ngFor="let author of authors$">
+                        <td>{{author.firstname}}</td>
+                        <td>{{author.lastname}}</td>
+                        <td>
+                            <div class="dropdown">
+                                <button class="btn btn-secondary-outline dropdown-toggle" type="button"
+                                    data-toggle="dropdown" aria-expanded="false"></button>
+                                <div class="dropdown-menu">
+                                    <button type="button" class="btn btn-link dropdown-item" [disabled]="!isAdd"
+                                        (click)="updateAuthorEmit(author)">Update
+                                    </button>
+                                    <button type="button" class="btn btn-link dropdown-item" [disabled]="!isAdd"
+                                        (click)="deleteAuthor(author.id)">Delete
+                                    </button>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <form [formGroup]="authorForm" (ngSubmit)="addUser()">
+        <modal #myModal>
+            <modal-header>
+                <h2 class="modal-title">{{title}}</h2>
+            </modal-header>
+            <modal-content>
+                <div class="form-group">
+                    <label for="firstname">Firstname</label>
+                    {{firstname}}fdece
+                    <input type="text" class="form-control" value="{{firstname}}" formControlName="firstname">
+                </div>
+                <div class="form-group">
+                    <label for="firstname">Lastname</label>
+                    <input type="text" class="form-control" formControlName="lastname">
+                </div>
+            </modal-content>
+            <modal-footer>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary mr-3" (click)="closeModal()">Close</button>
+                    <button type="submit" class="btn btn-primary" (click)="closeModal()">Add User</button>
+                </div>
+            </modal-footer>
+        </modal>
+    </form>
+</div> -->
+
+<!-- <ngx-datatable [rows]="authors$" [list]="authors$" default>
+    <ngx-datatable-column [name]="Action" [maxWidth]="150" [sortable]="false">
+
+    </ngx-datatable-column>
+</ngx-datatable> -->
+
+
+<!-- <div>
+    <h1 mat-dialog-title>Add User</h1>
+    <div mat-dialog-content>
+        <mat-form-field appearance="fill">
+            <mat-label>Input</mat-label>
+            <input matInput>
+        </mat-form-field>
+    </div>
+</div> -->
+
+<!-- <div class="modal fade" id="myModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Add User</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="authorForm" (ngSubmit)="addUser()">
+                    <div class="form-group">
+                        <label for="firstname">Firstname</label>
+                        <input type="text" class="form-control" formControlName="firstname">
+                    </div>
+                    <div class="form-group">
+                        <label for="firstname">Lastname</label>
+                        <input type="text" class="form-control" formControlName="lastname">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add User</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> -->

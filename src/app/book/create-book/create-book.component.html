@@ -1,0 +1,22 @@
+<h1>{{caption}}</h1>
+<form #bookForm="ngForm" (submit)="createBook(bookForm)">
+    <div class="form-group">
+        <input type="hidden" [(ngModel)]="isAvailable" name="isAvailable">
+        <label for="title">Book Title</label>
+        <input type="text" class="form-control" [(ngModel)]="title" name="title" required>
+    </div>
+    <div class="form-group">
+        <label for="authorId">Author</label>
+        <select for="authorId" class="form-control" [(ngModel)]="authorId" name="authorId" required>
+            <option *ngFor="let author of authors$" value="{{author.id}}">{{author.firstname}}
+                {{author.lastname}}</option>
+        </select>
+    </div>
+    <!-- <div class="form-check form-group">
+        <input class="form-check-input" type="checkbox" [(ngModel)]="isAvailable" name="isAvailable" id="isAvailable">
+        <label class="form-check-label" for="isAvailable"> isAvailable?</label>
+    </div> -->
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary float-right">{{caption}}</button>
+    </div>
+</form>

@@ -1,0 +1,90 @@
+<div class="container-fluid mt-5 border p-5">
+    <div class="row">
+        <div class="col-3 pt-3 border pb-3">
+            <app-create-book *ngIf="isAdd"></app-create-book>
+
+            <app-update-book *ngIf="isUpdate" [bookData]="bookData"></app-update-book>
+
+            <app-check-book-out *ngIf="isCheckout" [bookData]="bookData"></app-check-book-out>
+
+            <app-return-book *ngIf="isReturn" [checkoutData]="checkoutData" [bookData]="bookData"></app-return-book>
+        </div>
+        <div class="col-9 border">
+            <table class="table table-striped">
+                <tr>
+                    <th colspan="4" class="p-2">
+                        <h1>Books</h1>
+                    </th>
+                </tr>
+                <tr>
+                    <th>Book Title</th>
+                    <th>Is Available</th>
+                    <th>Author</th>
+                    <th style="max-width: 10px">Actions</th>
+                </tr>
+                <tr *ngFor="let book of books$">
+                    <td>{{book.title}}</td>
+                    <td>{{book.isAvailable}}</td>
+                    <td>{{book.author.firstname}} {{book.author.lastname}}</td>
+                    <td>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary-outline dropdown-toggle" type="button"
+                                data-toggle="dropdown" aria-expanded="false"></button>
+                            <div class="dropdown-menu">
+                                <button type="button" *ngIf="book.isAvailable" class="btn btn-link dropdown-item"
+                                    [disabled]="!isAdd" (click)="updateBookEmit(book)">Update
+                                </button>
+                                <button *ngIf="book.isAvailable" type="button" class="btn btn-link dropdown-item"
+                                    [disabled]="!isAdd" (click)="deleteBook(book.id)">Delete
+                                </button>
+                                <button *ngIf="book.isAvailable" class="btn btn-link dropdown-item" [disabled]="!isAdd"
+                                    (click)="checkoutBookEmit(book)">Checkout
+                                </button>
+                                <button *ngIf="!book.isAvailable" class="btn btn-link dropdown-item" [disabled]="!isAdd"
+                                    (click)="returnBookEmit(book)">Return Book
+                                </button>
+                            </div>
+                        </div>
+                    </td>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <form [formGroup]="bookForm" (ngSubmit)="addBook()">
+        <modal #myModal>
+            <modal-header>
+                <h2 class="modal-title">Add Book</h2>
+            </modal-header>
+            <modal-content>
+                <div class="form-group">
+                    <label for="title">Book Title</label>
+                    <input type="text" class="form-control" formControlName="title">
+                </div>
+                <div class="form-group">
+                    <label for="isAvailable">Is Available</label>
+                    <select for="isAvailable" class="form-control" formControlName="isAvailable">
+                        <option value="true">True</option>
+                        <option value="false">False</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="authorId">Author</label>
+                    <select for="authorId" class="form-control" formControlName="authorId">
+                        <div>
+                            {{firstname}}
+                            <option value="{{authorId}}">{{firstname}} {{lastname}}</option>
+                        </div>
+                    </select>
+                </div>
+            </modal-content>
+            <modal-footer>
+                <div class="form-group">
+                    <button type="button" class="btn btn-secondary mr-3" (click)="closeModal()">Close</button>
+                    <button type="submit" class="btn btn-primary" (click)="closeModal()">Add Book</button>
+                </div>
+            </modal-footer>
+        </modal>
+    </form>
+</div> -->

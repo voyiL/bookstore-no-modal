@@ -1,0 +1,20 @@
+<h1>{{caption}}</h1>
+<form #checkoutForm="ngForm" (submit)="checkoutBookOut(checkoutForm)">
+    <div class="form-group">
+        <label for="firstname">Firstname</label>
+        <input type="text" class="form-control" [(ngModel)]="firstname" name="firstname">
+    </div>
+    <div class="form-group">
+        <label for="lastname">Lastname</label>
+        <input type="text" class="form-control" [(ngModel)]="lastname" name="lastname">
+    </div>
+    <div class="form-group">
+        <label for="bookId">Book</label>
+        <input type="text" class="form-control" disabled value="{{bookData.title}}">
+        <input type="hidden" [(ngModel)]="bookId" name="bookId">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="btn btn-primary float-right">{{caption}}</button><button type="button"
+            class="btn btn-secondary mr-2 float-right" (click)="cancel()">Cancel</button>
+    </div>
+</form>
